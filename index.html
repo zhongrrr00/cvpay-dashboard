@@ -380,9 +380,6 @@
       <div class="summary-bar">
         <span><span class="label">合计</span></span>
         <span><span class="sub-label">累计盈亏</span> <span class="val-neg" id="profit-sum-pl">—</span></span>
-        <span><span class="sub-label">手续费亏损</span> <span class="val-neg" id="profit-sum-fee">—</span></span>
-        <span><span class="sub-label">买卖价差</span> <span class="val-pos" id="profit-sum-spread">—</span></span>
-        <span><span class="sub-label">汇率差异</span> <span class="val-neg" id="profit-sum-fx">—</span></span>
       </div>
 
       <div class="table-card">
@@ -397,9 +394,6 @@
                 <th colspan="2">汇率</th>
                 <th rowspan="2" style="min-width: 100px;">盈亏情况</th>
                 <th rowspan="2" style="min-width: 90px;">单日波动</th>
-                <th rowspan="2" style="min-width: 100px;">手续费亏损</th>
-                <th rowspan="2" style="min-width: 90px;">买卖价差</th>
-                <th rowspan="2" style="min-width: 90px;">汇率差异</th>
               </tr>
               <tr>
                 <th>LBA6G57729</th><th>LBA9H52363</th>
@@ -647,7 +641,7 @@
   };
 
   // 盈利计算 mock 数据：每日快照
-  // pl = 盈亏情况；vol = 单日波动；fee = 手续费亏损；spread = 买卖价差；fx = 汇率差异
+  // pl = 盈亏情况；vol = 单日波动
   const profitData = [
     { d: '05/06', credit: 100000, vault: { a: 75996.42, b: 50012.50 }, plat: { vnd: 258300000, php: 4820000 }, rate: { vnd: 25950, php: 56.0 }, pl: -9000, vol: -1.20, fee: -50.20, spread: 200.00, fx: -150.00 },
     { d: '05/05', credit: 100000, vault: { a: 80324.18, b: 49887.20 }, plat: { vnd: 246800000, php: 4912000 }, rate: { vnd: 26010, php: 56.2 }, pl: 1820, vol: 0.24, fee: -42.10, spread: 320.50, fx: -88.40 },
@@ -848,9 +842,6 @@
         '<td>' + p.rate.php.toFixed(2) + '</td>' +
         '<td>' + sgn(p.pl, 2) + '</td>' +
         '<td>' + pct(p.vol) + '</td>' +
-        '<td>' + sgn(p.fee, 2) + '</td>' +
-        '<td>' + sgn(p.spread, 2) + '</td>' +
-        '<td>' + sgn(p.fx, 2) + '</td>' +
       '</tr>';
     }).join('');
 
@@ -863,9 +854,6 @@
       el.className = (posIsGood ? (v >= 0 ? 'val-pos' : 'val-neg') : (v >= 0 ? 'val-pos' : 'val-neg'));
     };
     setSum('profit-sum-pl', sum('pl'), true);
-    setSum('profit-sum-fee', sum('fee'), false);
-    setSum('profit-sum-spread', sum('spread'), true);
-    setSum('profit-sum-fx', sum('fx'), false);
   }
 
   function renderLink() {
